@@ -4,28 +4,30 @@ using namespace std;
 class Stack{
     int *arr;
     int top;
-    int capacity;
-public:
+    int size;
+
+    public: 
+
     Stack(int size){
+        this->size = size;
         arr = new int[size];
-        capacity = size;
         top = -1;
     }
 
     void push(int x){
-        if(top == capacity - 1){
+        if( top == size -1){
             cout << "Stack overflow" << endl;
             return;
         }
         arr[++top] = x;
     }
 
-    int pop(){
-        if(top == -1){
+    void pop(){
+        if (top == -1){
             cout << "Stack underflow" << endl;
-            return -1;
+            return;
         }
-        return arr[top--];
+        top--;
     }
 
     int peek(){
@@ -35,13 +37,23 @@ public:
         }
         return arr[top];
     }
-    
-    int size(){
+
+    bool isEmpty(){
+        if(top == -1){
+            return true;
+        }
+        return false;
+    }
+
+    int sizee(){
         return top + 1;
     }
+
 };
 
-int main(){
+
+int main() {
+
     Stack s(5);
     s.push(1);
     s.push(2);
@@ -51,11 +63,20 @@ int main(){
     s.push(6); // overflow
 
     cout << "Top element is: " << s.peek() << endl; 
-    cout << "Stack size is: " << s.size() << endl; 
+    cout << "Stack size is: " << s.sizee() << endl; 
 
-    cout << "Popped element is: " << s.pop() << endl;
+    s.pop();
     cout << "Top element is: " << s.peek() << endl; 
-    cout << "Stack size is: " << s.size() << endl; 
+    cout << "Stack size is: " << s.sizee() << endl; 
+
+    
+    if (s.isEmpty()){
+        cout << "Stack is Empty "<<endl;
+    }
+    else{
+        cout << "Stack is not Empty" << endl;
+    }
+
 
     return 0;
 }
